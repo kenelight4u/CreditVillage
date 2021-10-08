@@ -8,6 +8,7 @@
     <Folder Include="Controllers\" />
     <Folder Include="Models\Map\" />
     <Folder Include="Services\" />
+    <Folder Include="Utils\Enums\NewFolder\" />
   </ItemGroup>
 
   <ItemGroup>
