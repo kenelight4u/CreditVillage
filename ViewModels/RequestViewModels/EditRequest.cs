@@ -7,18 +7,8 @@ using System.Threading.Tasks;
 
 namespace CreditVillageBackend.ViewModels.RequestViewModels
 {
-    public class EditRequest
+    public class EditRequest : UpdateRequest
     {
-        [Display(Name = "First Name")]
-        public string FirstName { get; set; }
-
-        [Display(Name = "Last Name")]
-        public string LastName { get; set; }
-
-        [RegularExpression(@"^([0-9]{11})$", ErrorMessage = "Not a valid phone number")]
-        [Display(Name = "Phone Number")]
-        public string PhoneNumber { get; set; }
-
         public IFormFile LogoFile { get; set; }
 
         [Display(Name = "Gender")]
