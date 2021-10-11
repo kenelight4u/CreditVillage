@@ -86,12 +86,18 @@ namespace CreditVillageBackend.Controllers
 
             //Front end guy will give me the URL that I needed
             var callbackUrl = $"/Account/ResetPassword?UserId={userResponse.Email}&Code={userResponse.Code}";
-           // var callbackUrl = Url.Action("ForgetPassword", "Manage", new { Email = userResponse.Email, Code = userResponse.Code }, HttpContext.Request.Scheme);
-          
+            // var callbackUrl = Url.Action("ForgetPassword", "Manage", new { Email = userResponse.Email, Code = userResponse.Code }, HttpContext.Request.Scheme);
+            var content =
+                $"<p>Hello {userResponse.FirstName}, </p>" +
+                $"<p>A request has been received to change the password for your Credit Village account. <a href=\"{callbackUrl}\"> Reset password </a></p>" +
+                $"<p>If you did not initiate this request, please contact us immediately <a href=\"creditvillage@outlook.com\">creditvillage@outlook.com.</a></p>" +
+                $"<p>Thank you,</p>" +
+                $"<p>The Credit Village team</p>";
+
             await _mailService.SendEmailAsync(
                     userResponse.Email,
-                    "CREDIT VILLAGE - Reset Password",
-                    $"Please Reset your password by clicking this link: <a href=\"{callbackUrl}\">Click here </a>"
+                    $"Reset your password",
+                    content
                     );
 
             return Ok( _mapper.Map<ForgetPasswordMapping>(userResponse));

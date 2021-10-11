@@ -9,7 +9,6 @@ namespace CreditVillageBackend.ViewModels.RequestViewModels
 {
     public class EditRequest : UpdateRequest
     {
-        
         public IFormFile LogoFile { get; set; }
 
         [Display(Name = "Gender")]

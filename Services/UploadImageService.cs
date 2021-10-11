@@ -19,34 +19,22 @@ namespace CreditVillageBackend.Services
             _dbContext = context;
         }
 
-        public async Task<Guid> UploadToDatabase(IFormFile file, Guid id)
+        public async Task<Guid> UploadImageToDatabase(IFormFile file, Guid id)
         {
-            var fileName = Path.GetFileNameWithoutExtension(file.FileName);
-            var extension = Path.GetExtension(file.FileName);
-
             //checks if user have a proile pic before now
             var existingImage = await _dbContext.ProfileImage.SingleOrDefaultAsync(p => p.Id == id);
 
             //if true, it Updates
             if (existingImage != null)
             {
-                existingImage.FileType = file.ContentType;
-                existingImage.ModifiedOn = DateTime.Now;
-                existingImage.Extension = extension;
-                existingImage.Name = fileName;
+               var updatedId = UpdateImageInDatabase(existingImage, file);
 
-                using (var stream = new MemoryStream())
-                {
-                    await file.CopyToAsync(stream);
-                    existingImage.LogoBase64 = stream.ToArray();
-                }
-
-                _dbContext.ProfileImage.Update(existingImage);
-                await _dbContext.SaveChangesAsync();
-
-                return existingImage.Id;
+                return updatedId.Result;
             }
             // Else, it Creates
+            var fileName = Path.GetFileNameWithoutExtension(file.FileName);
+            var extension = Path.GetExtension(file.FileName);
+
             var uploadImage = new UploadModel
             {
                 Id = Guid.NewGuid(),
@@ -79,6 +67,28 @@ namespace CreditVillageBackend.Services
             };
 
             return data;
+        }
+
+        public async Task<Guid> UpdateImageInDatabase(UploadModel existingImage, IFormFile file)
+        {
+            var fileName = Path.GetFileNameWithoutExtension(file.FileName);
+            var extension = Path.GetExtension(file.FileName);
+
+            existingImage.FileType = file.ContentType;
+            existingImage.ModifiedOn = DateTime.Now;
+            existingImage.Extension = extension;
+            existingImage.Name = fileName;
+
+            using (var stream = new MemoryStream())
+            {
+                await file.CopyToAsync(stream);
+                existingImage.LogoBase64 = stream.ToArray();
+            }
+
+            _dbContext.ProfileImage.Update(existingImage);
+            await _dbContext.SaveChangesAsync();
+
+            return existingImage.Id;
         }
     }
 }

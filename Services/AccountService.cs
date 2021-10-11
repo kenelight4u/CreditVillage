@@ -83,7 +83,7 @@ namespace CreditVillageBackend
                 {
                     Check = true,
                     Status = "success",
-                    Message = $"Account Created Successfully. Please Check Your EMail For OTP",
+                    Message = $"Account Created Successfully. Please Check Your Email For OTP",
                     UserId = newUser.Id,
                     Email = newUser.Email,
                     Code = code
@@ -140,7 +140,7 @@ namespace CreditVillageBackend
                 {
                     Check = true,
                     Status = "success",
-                    Message = $"Account Created Successfully. Please Check Your Phone For OTP",
+                    Message = $"Account Created Successfully. Please Check Your Email For OTP",
                     UserId = newUser.Id,
                     Email = newUser.Email,
                     Code = code
@@ -165,7 +165,7 @@ namespace CreditVillageBackend
                 {
                     Check = false,
                     Status = "success",
-                    Message = "Please Check Your Phone For OTP"
+                    Message = "Email doesn't Exist"
                 };
             }
 
@@ -177,7 +177,7 @@ namespace CreditVillageBackend
             {
                 Check = true,
                 Status = "success",
-                Message = "Please Check Your Phone For OTP"
+                Message = "Please Check Your Email For OTP"
             };
         }
 
@@ -297,6 +297,7 @@ namespace CreditVillageBackend
                 Check = true,
                 Status = "success",
                 Message = $"Reset Password link has been sent to your mail",
+                FirstName = existingUser.FirstName,
                 UserId = existingUser.Id,
                 Email = existingUser.Email,
                 Code = code
@@ -466,7 +467,7 @@ namespace CreditVillageBackend
 
             if (editRequest.LogoFile != null)
             {
-                var imageId = await _uploadImage.UploadToDatabase(editRequest.LogoFile, user.LogoFileId);
+                var imageId = await _uploadImage.UploadImageToDatabase(editRequest.LogoFile, user.LogoFileId);
                 user.LogoFileId = imageId;
             }
             
@@ -488,10 +489,17 @@ namespace CreditVillageBackend
 
         private async Task SendCodeToUser(string userEmail, string code)
         {
-            string content = $"Confirm Your Account, Your OTP is { code }";
+            string content = 
+                $"<h4>Credit Village account</h4>" +
+                $"<p style='font-size: 41px; color: #2672ec'> Confirm your email address</p>" +
+                $"<p>To finish setting up your Credit Village account, we just need to make sure this email address is yours.</p>" +
+                $"<p>To verify your email address use this security code: <b>{ code }</b></p>" +
+                $"<p>If you didn't request this code, you can safely ignore this email. Someone else might have typed your email address by mistake.</p>" +
+                $"<p>Thanks,</p>" +
+                $"<p>The Credit Village team</p>";
 
-            var subject = "CREDIT VILLAGE";
-
+            var subject = $"Confirm your email address";
+            
            await _mailService.SendEmailAsync(userEmail, subject, content);
         }
 
@@ -514,8 +522,8 @@ namespace CreditVillageBackend
                 new Claim(JwtRegisteredClaimNames.UniqueName, user.Id),
                 new Claim(ClaimTypes.Name, user.UserName),
                 new Claim(ClaimTypes.Email, user.Email),
-                new Claim(ClaimTypes.GivenName, user.FirstName),
-                new Claim(ClaimTypes.Surname, user.LastName),
+                //new Claim(ClaimTypes.GivenName, user.FirstName),
+                //new Claim(ClaimTypes.Surname, user.LastName),
                 new Claim(ClaimTypes.Role, roles.FirstOrDefault()),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
