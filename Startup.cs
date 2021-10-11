@@ -77,7 +77,7 @@ namespace CreditVillageBackend
 
                 var security = new Dictionary<string, IEnumerable<string>>
                 {
-                    {"Bearer", new string[0] }
+                    {"Bearer", new string[] { } }
                 };
 
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
@@ -105,7 +105,9 @@ namespace CreditVillageBackend
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CreditVillageBackend v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CreditVillageBackend v1")
+                );
+
             }
 
             app.UseHttpsRedirection();

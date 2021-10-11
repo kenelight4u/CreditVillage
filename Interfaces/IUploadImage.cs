@@ -9,7 +9,9 @@ namespace CreditVillageBackend.Interfaces
 {
     public interface IUploadImage
     {
-        Task<Guid> UploadToDatabase(IFormFile file, Guid id);
+        Task<Guid> UploadImageToDatabase(IFormFile file, Guid id);
+
+        Task<Guid> UpdateImageInDatabase(UploadModel existingImage, IFormFile file);
 
         Task<DetailsConfirm> GetFileFromDatabase(string id);
     }
