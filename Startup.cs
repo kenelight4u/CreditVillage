@@ -71,6 +71,7 @@ namespace CreditVillageBackend
 
             services.AddControllers();
 
+            //Added this because of CORS issue FE guys were having
             services.AddCors(options => options.AddPolicy("AllowAll", builder => builder.AllowAnyOrigin()
                                                                                         .AllowAnyMethod()
                                                                                         .AllowAnyHeader()));

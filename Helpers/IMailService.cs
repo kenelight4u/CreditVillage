@@ -27,7 +27,7 @@ namespace CreditVillageBackend.Helpers
         {
             var apiKey = _configuration["SendGridAPIKey"];
             var client = new SendGridClient(apiKey);
-            var from = new EmailAddress("ekeneanolue@outlook.com", "Credit Villa");
+            var from = new EmailAddress("ekeneanolue@outlook.com", "Credit Village");
             var to = new EmailAddress(toEmail);
             var msg = MailHelper.CreateSingleEmail(from, to, subject, message, message);
 
