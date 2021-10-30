@@ -71,6 +71,11 @@ namespace CreditVillageBackend
 
             services.AddControllers();
 
+            //Added this because of CORS issue FE guys were having
+            services.AddCors(options => options.AddPolicy("AllowAll", builder => builder.AllowAnyOrigin()
+                                                                                        .AllowAnyMethod()
+                                                                                        .AllowAnyHeader()));
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CreditVillageBackend", Version = "v1" });
@@ -120,6 +125,8 @@ namespace CreditVillageBackend
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseCors("AllowAll");
 
             app.UseEndpoints(endpoints =>
             {

@@ -51,7 +51,7 @@ namespace CreditVillageBackend
                 return new RegisterResponse()
                 {
                     Check = false,
-                    Status = "success",
+                    Status = "error",
                     Message = "This Email Address is Already Used"
                 };
             }
@@ -108,7 +108,7 @@ namespace CreditVillageBackend
                 return new RegisterResponse()
                 {
                     Check = false,
-                    Status = "success",
+                    Status = "error",
                     Message = "This Email Address is Already Used"
                 };
             }
@@ -164,7 +164,7 @@ namespace CreditVillageBackend
                 return new ResendCodeResponse()
                 {
                     Check = false,
-                    Status = "success",
+                    Status = "error",
                     Message = "Email doesn't Exist"
                 };
             }
@@ -191,7 +191,7 @@ namespace CreditVillageBackend
                 return new VerifyResponse()
                 {
                     Check = false,
-                    Status = "success",
+                    Status = "error",
                     Message = "This Email Address doesn't exist"
                 };
             }
@@ -203,7 +203,7 @@ namespace CreditVillageBackend
                 return new VerifyResponse()
                 {
                     Check = false,
-                    Status = "success",
+                    Status = "error",
                     Message = "Invalid token"
                 };
             }
@@ -234,7 +234,7 @@ namespace CreditVillageBackend
                 return new LoginResponse()
                 {
                     Check = false,
-                    Status = "success",
+                    Status = "error",
                     Message = "Email or Password is Wrong"
                 };
             }
@@ -258,7 +258,7 @@ namespace CreditVillageBackend
                 return new LoginResponse()
                 {
                     Check = false,
-                    Status = "success",
+                    Status = "error",
                     Message = "Your Email Address has not been confirm. Kindly Check Your Email Address"
                 };
             }
@@ -276,7 +276,7 @@ namespace CreditVillageBackend
                 return new ForgetPasswordResponse()
                 {
                     Check = false,
-                    Status = "success",
+                    Status = "error",
                     Message = "Email does not Exist, Please Register"
                 };
             }
@@ -285,7 +285,7 @@ namespace CreditVillageBackend
                 return new ForgetPasswordResponse()
                 {
                     Check = false,
-                    Status = "success",
+                    Status = "error",
                     Message = "Your Email Address has not been confirm. Kindly Check Your Email Address"
                 };
             }
@@ -313,7 +313,7 @@ namespace CreditVillageBackend
                 return new ResetPasswordResponse()
                 {
                     Check = false,
-                    Status = "success",
+                    Status = "error",
                     Message = "Email does not Exist, Please Register"
                 };
             }
@@ -322,7 +322,7 @@ namespace CreditVillageBackend
                 return new ResetPasswordResponse()
                 {
                     Check = false,
-                    Status = "success",
+                    Status = "error",
                     Message = "Your Email Address has not been confirm. Kindly Check Your Email Address"
                 };
             }
@@ -334,7 +334,7 @@ namespace CreditVillageBackend
                 return new ResetPasswordResponse()
                 {
                     Check = false,
-                    Status = "success",
+                    Status = "error",
                     Message = "Invalid Token"
                 };
             }
@@ -357,7 +357,7 @@ namespace CreditVillageBackend
                 return new ChangePasswordResponse()
                 {
                     Check = false,
-                    Status = "success",
+                    Status = "error",
                     Message = "Your Email Address has not been confirm. Kindly Check Your Email Address"
                 };
             }
@@ -369,7 +369,7 @@ namespace CreditVillageBackend
                 return new ChangePasswordResponse()
                 {
                     Check = false,
-                    Status = "success",
+                    Status = "error",
                     Message = "Your Old Password is Incorrect"
                 };
             }
@@ -431,7 +431,7 @@ namespace CreditVillageBackend
                 return new UpdateResponse()
                 {
                     Check = false,
-                    Status = "success",
+                    Status = "error",
                     Message = "Username Doesn't Exist"
                 };
             }
@@ -460,7 +460,7 @@ namespace CreditVillageBackend
                 return new EditResponse()
                 {
                     Check = false,
-                    Status = "success",
+                    Status = "error",
                     Message = "Username Doesn't Exist"
                 };
             }
